@@ -53,32 +53,32 @@ void	printlines(int fd, size_t size, char *buf)
 	}
 }
 
-void	printline(int fd, size_t size, char *buf)
+void	printline(int fd, size_t size)
 {
 	size_t		len;
-	char		*t;
+	char		*temp;
 	static char	*rest;
+	char		*buf;
 
+	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	size = read(fd, buf, BUFFER_SIZE);
 	len = (size_t)ft_memchr_i(buf, '\n', size);
 	temp = ft_strndup(buf, len);
 	rest = ft_strndup(buf + len + 1, size - len);
-	printf("line : [%s]\nrest : [%s]\nall : [%s]\n", t, rest, buf);
-	free(t);
+	printf("line : [%s]\nrest : [%s]\nall : [%s]\n", temp, rest, buf);
+	free(temp);
+	free(buf);
 }
 
 int	main()
 {
 	int			fd;
 	const char	*file1 = "test_file";
-	char		*buf;
 
 	fd = open(file1, O_RDONLY);
-	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
 
 //	printlines(fd, BUFFER_SIZE, buf);
-	printline(fd, BUFFER_SIZE, buf);
+	printline(fd, BUFFER_SIZE);
 
-	free(buf);
 	close(fd);
 }
