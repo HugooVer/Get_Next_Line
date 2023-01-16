@@ -8,31 +8,77 @@
 #include <fcntl.h>
 #include <string.h>
 
-char    *ft_strjoin(char *s1, char *s2);
-
-int	main()
+void	*ft_memchr_i(const void *s, int c, size_t n)
 {
-	int			fd;
-	size_t		size;
-	const char	*file1 = "test_file";
-	char		*buf;
-	char		*ret;
+	size_t	i;
 
-	fd = open(file1, O_RDONLY);
-	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	size = BUFFER_SIZE;
-	ret = "i";
+	i = 0;
+	c = (unsigned char) c;
+	while (i < n)
+	{
+		if (*(const unsigned char *)(s + i) == c)
+		{
+			return ((void *) i);
+		}
+		++i;
+	}
+	return (NULL);
+}
 
+char	*ft_strndup(const char *s, const size_t len)
+{
+	char			*ret;
+	size_t			i;
+
+	ret = malloc((len + 1) * sizeof(char));
+	i = 0;
+	if (ret == NULL)
+		return (NULL);
+	while (i <= len)
+	{
+		ret[i] = s[i];
+		++i;
+	}
+	ret[i] = '\0';
+	return (ret);
+}
+
+void	printlines(int fd, size_t size, char *buf)
+{
 	while(size == BUFFER_SIZE)
 	{
 		size = read(fd, buf, BUFFER_SIZE);
 		buf[size] = '\0';
-		ret = ft_strjoin(ret, buf);
-//		write(1, buf, size);
+		write(1, buf, size);
 	}
-	printf("%lu", strlen(ret));
+}
+
+void	printline(int fd, size_t size, char *buf)
+{
+	size_t		len;
+	char		*t;
+	static char	*rest;
+
+	size = read(fd, buf, BUFFER_SIZE);
+	len = (size_t)ft_memchr_i(buf, '\n', size);
+	temp = ft_strndup(buf, len);
+	rest = ft_strndup(buf + len + 1, size - len);
+	printf("line : [%s]\nrest : [%s]\nall : [%s]\n", t, rest, buf);
+	free(t);
+}
+
+int	main()
+{
+	int			fd;
+	const char	*file1 = "test_file";
+	char		*buf;
+
+	fd = open(file1, O_RDONLY);
+	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
+
+//	printlines(fd, BUFFER_SIZE, buf);
+	printline(fd, BUFFER_SIZE, buf);
+
 	free(buf);
 	close(fd);
-
-
 }
