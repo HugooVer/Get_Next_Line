@@ -1,12 +1,5 @@
 
-#include <stdio.h>
-
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <string.h>
+#include "get_next_line.h"
 
 void	*ft_memchr_i(const void *s, int c, size_t n)
 {
