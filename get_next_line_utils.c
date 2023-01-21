@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:39:13 by hvercell          #+#    #+#             */
-/*   Updated: 2023/01/21 18:51:35 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/01/21 20:30:59 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ size_t	ft_strlen(char *s)
 	return (len);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strnjoin(char *s1, char *s2, size_t n)
 {
 	size_t	len1;
 	size_t	len2;
@@ -54,7 +54,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (s1 != NULL)
 		len1 = ft_strlen(s1);
 	if (s2 != NULL)
-		len2 = ft_strlen(s2);
+		len2 = n;
 	ret = malloc((len1 + len2 + 1) * sizeof(char));
 	if (ret == NULL)
 		return (NULL);

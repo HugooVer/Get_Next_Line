@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:38:55 by hvercell          #+#    #+#             */
-/*   Updated: 2023/01/21 18:51:29 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/01/21 21:13:02 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,27 @@ char	*get_next_line(int fd)
 	size_t		size;
 	static char	rest[BUFFER_SIZE + 1] = {0};
 	char		*buf;
-//	char		line;
+	char		line;
 
 	buf = NULL;
 	if (ft_memchr_i(rest, '\n') != -1)
 	{
-		return (rest);
+		line = ft_strnjoin(line, rest, ft_memchr_i(rest, '\n'));
+		rest = ft_strnjoin(rest, line + ft_memchr_i(rest, '\n'), ft_strlen(line + ft_memchr_i(rest, '\n')));
 	}
 	else
 	{
+		if (rest != NULL)
+			line = ft_strnjoin(line, rest, ft_strlen(rest));
 		size = read(fd, buf, BUFFER_SIZE);
-		return (buf);
+		line = ft_strnjoin(line, buf, ft_strlen(buf));
+		get_next_line(fd);
 	}
 }
 
-
-
 int	main(int argc, char **argv)
 {
-	int			fd;
-	//const char	*file = "test_file7";
+	int	fd;
 
 	(void)argc;
 	fd = open(argv[1], O_RDONLY);
