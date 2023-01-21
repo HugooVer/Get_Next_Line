@@ -6,44 +6,29 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:39:13 by hvercell          #+#    #+#             */
-/*   Updated: 2023/01/20 21:41:43 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/01/21 18:51:35 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strndup(const char *s, const size_t n)
-{
-	size_t	i;
-	char	*ret;
 
-	ret = malloc((n + 1) * sizeof(char));
-	i = 0;
-	if (ret == NULL)
-		return (NULL);
-	while (i <= n)
-	{
-		ret[i] = s[i];
-		++i;
-	}
-	ret[i] = '\0';
-	return (ret);
-}
 
-void	*ft_memchr_i(const void *s, int c)
+ssize_t	ft_memchr_i(char *s, int c)
 {
 	size_t			i;
-	const size_t	n = ft_strlen(s);
+	size_t			n;
 
+	n = ft_strlen(s);
 	i = 0;
 	c = (unsigned char) c;
 	while (i < n)
 	{
 		if (*(const unsigned char *)(s + i) == c)
-			return ((void *) i);
+			return (i);
 		++i;
 	}
-	return (NULL);
+	return (-1);
 }
 
 size_t	ft_strlen(char *s)
@@ -56,26 +41,42 @@ size_t	ft_strlen(char *s)
 	return (len);
 }
 
-void	ft_add_read(char *rest, size_t new_line_index, int fd)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	size;
-	char	*temp;
+	size_t	len1;
+	size_t	len2;
 	char	*ret;
 
-	size = read(fd, temp, BUFFER_SIZE);
-	ret = ft_strjoin(rest, temp);
-	free (rest);
-	free (temp);
-	return (ret);
+	if (s1 == NULL && s2 == NULL)
+		return (NULL);
+	len1 = 0;
+	len2 = 0;
+	if (s1 != NULL)
+		len1 = ft_strlen(s1);
+	if (s2 != NULL)
+		len2 = ft_strlen(s2);
+	ret = malloc((len1 + len2 + 1) * sizeof(char));
+	if (ret == NULL)
+		return (NULL);
+	if (s1 != NULL)
+		ft_strlcpy(ret, s1, len1 + 1);
+	if (s2 != NULL)
+		ft_strlcpy(ret + len1, s2, len2 + 1);
+	return (free(s1), free(s2), ret);
 }
 
-void	ft_return_line(char *rest, size_t new_line_index)
+size_t	ft_strlcpy(char *dst, char *src, size_t size)
 {
-	size_t	len;
-	char	*temp;
+	size_t	i;
 
-	len = (size_t)ft_memchr_i(rest, '\n');
-	temp = ft_strndup(rest, len);
-	rest = ft_strndup(rest + len, ft_strlen(rest + len));
-	return (temp);
+	i = 0;
+	if (size == 0)
+		return (ft_strlen (src));
+	while (i < size - 1 && src[i] != '\0')
+	{
+		dst[i] = src[i];
+		++i;
+	}
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }

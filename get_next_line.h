@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:39:04 by hvercell          #+#    #+#             */
-/*   Updated: 2023/01/20 18:29:45 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/01/21 18:51:47 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,15 @@
 # include <fcntl.h>
 # include <string.h>
 
-/*
-char	*get_next_line(int fd);
-char	*ft_strjoin(char const *s1, char const *s2);
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 24
+# endif
 
-char	*ft_strndup(const char *s, const size_t n);
-void	*ft_memchr_i(const void *s, int c);
+char	*get_next_line(int fd);
+
+char	*ft_strjoin(char *s1, char *s2);
+size_t	ft_strlcpy(char *dst, char *src, size_t size);
+ssize_t	ft_memchr_i(char *s, int c);
 size_t	ft_strlen(char *s);
-void	ft_add_read(char *rest, size_t new_line_index, int fd);
-void	ft_return_line(char *rest, size_t new_line_index);
-*/
+
 #endif
