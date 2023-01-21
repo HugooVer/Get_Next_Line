@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:39:13 by hvercell          #+#    #+#             */
-/*   Updated: 2023/01/17 19:00:20 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/01/20 21:41:43 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strndup(const char *s, const size_t n)
 {
-	size_t			i;
-	char			*ret;
+	size_t	i;
+	char	*ret;
 
 	ret = malloc((n + 1) * sizeof(char));
 	i = 0;
@@ -76,5 +76,6 @@ void	ft_return_line(char *rest, size_t new_line_index)
 
 	len = (size_t)ft_memchr_i(rest, '\n');
 	temp = ft_strndup(rest, len);
+	rest = ft_strndup(rest + len, ft_strlen(rest + len));
 	return (temp);
 }
