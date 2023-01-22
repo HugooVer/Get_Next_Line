@@ -6,26 +6,28 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:39:13 by hvercell          #+#    #+#             */
-/*   Updated: 2023/01/21 20:30:59 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/01/22 23:53:43 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-
 
 ssize_t	ft_memchr_i(char *s, int c)
 {
 	size_t			i;
 	size_t			n;
 
+	if (s == NULL)
+		return (-1); 
 	n = ft_strlen(s);
 	i = 0;
 	c = (unsigned char) c;
 	while (i < n)
 	{
 		if (*(const unsigned char *)(s + i) == c)
+		{
 			return (i);
+		}
 		++i;
 	}
 	return (-1);
@@ -62,7 +64,7 @@ char	*ft_strnjoin(char *s1, char *s2, size_t n)
 		ft_strlcpy(ret, s1, len1 + 1);
 	if (s2 != NULL)
 		ft_strlcpy(ret + len1, s2, len2 + 1);
-	return (free(s1), free(s2), ret);
+	return (free(s1), ret);
 }
 
 size_t	ft_strlcpy(char *dst, char *src, size_t size)
@@ -79,4 +81,17 @@ size_t	ft_strlcpy(char *dst, char *src, size_t size)
 	}
 	dst[i] = '\0';
 	return (ft_strlen(src));
+}
+
+void	*ft_memset(void *s, int c, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (n > i)
+	{
+		((unsigned char *)s)[n - i - 1] = (unsigned char)c;
+		++i;
+	}
+	return (s);
 }

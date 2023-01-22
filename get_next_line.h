@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:39:04 by hvercell          #+#    #+#             */
-/*   Updated: 2023/01/21 18:51:47 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/01/22 20:57:34 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@
 
 char	*get_next_line(int fd);
 
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strnjoin(char *s1, char *s2, size_t n);
 size_t	ft_strlcpy(char *dst, char *src, size_t size);
 ssize_t	ft_memchr_i(char *s, int c);
 size_t	ft_strlen(char *s);
+void	*ft_memset(void *s, int c, size_t n);
 
 #endif
