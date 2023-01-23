@@ -1,6 +1,6 @@
 
 #include "get_next_line.h"
-
+/*
 void	*ft_memchr_i(const void *s, int c, size_t n)
 {
 	size_t	i;
@@ -62,16 +62,17 @@ void	printline(int fd, size_t size)
 	free(temp);
 	free(buf);
 }
-
+*/
 int	main()
 {
 	int			fd;
-	const char	*file1 = "test_file";
+	const char	*file1 = "test_iiifile";
 
 	fd = open(file1, O_RDONLY);
 
 //	printlines(fd, BUFFER_SIZE, buf);
-	printline(fd, BUFFER_SIZE);
+//	printline(fd, BUFFER_SIZE);
+	printf("%i", fd);
 
 	close(fd);
 }
