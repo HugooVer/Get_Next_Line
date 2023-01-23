@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:38:55 by hvercell          #+#    #+#             */
-/*   Updated: 2023/01/23 17:42:38 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/01/23 18:31:24 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ char	*get_next_line(int fd)
 			ft_memset(buf, '\0', BUFFER_SIZE + 1);
 			size = read(fd, buf, BUFFER_SIZE);
 			if (size == 0)
-			{
-				free(line);
-				return (NULL);
-			}
+				return (free(line), NULL);
 			buf[size] = '\0';
 			if (ft_memchr_i(buf, '\n') == -1)
 			{
@@ -51,13 +48,13 @@ char	*get_next_line(int fd)
 				line = ft_strnjoin(line, buf, ft_memchr_i(buf, '\n') + 1);
 				ft_memset(rest, '\0', BUFFER_SIZE + 1);
 				ft_strlcpy(rest, buf + ft_memchr_i(buf, '\n') + 1, ft_strlen(buf + ft_memchr_i(buf, '\n')) + 1);
-				ft_memset(buf, '\0', BUFFER_SIZE + 1);
+//				ft_memset(buf, '\0', BUFFER_SIZE + 1);
 			}
 		}
 	}
 	return (line);
 }
-
+/*
 int	main(int argc, char **argv)
 {
 	int		fd;
@@ -78,3 +75,4 @@ int	main(int argc, char **argv)
 	printf("%i [%s]\n", i, res);
 	return (1);
 }
+*/
