@@ -24,3 +24,4 @@ ssize_t	ft_memchr_i(char *s, int c)
 	}
 	return (-1);
 }
+dfgdfgdfgfddgf
