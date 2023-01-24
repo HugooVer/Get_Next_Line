@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:38:55 by hvercell          #+#    #+#             */
-/*   Updated: 2023/01/24 21:36:52 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/01/24 22:10:57 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	line = NULL;
-	if (fd >= FTOPEN_MAX)
+	if (fd < 0 || fd >= FTOPEN_MAX)
 		return (NULL);
 	rest_s = ft_memchr_i(rest[fd], '\n');
 	if (rest_s != -1)

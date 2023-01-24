@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:39:04 by hvercell          #+#    #+#             */
-/*   Updated: 2023/01/24 21:38:18 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/01/24 22:10:12 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@
 
 # ifndef FTOPEN_MAX
 #  define FTOPEN_MAX FOPEN_MAX
+# endif
+
+# if BUFFER_SIZE < 0
+#  undef BUFFER_SIZE
+#  define BUFFER_SIZE 0
 # endif
 
 char	*get_next_line(int fd);

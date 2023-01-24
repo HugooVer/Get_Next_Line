@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:39:04 by hvercell          #+#    #+#             */
-/*   Updated: 2023/01/24 21:38:56 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/01/24 22:09:21 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 24
+# endif
+
+# if BUFFER_SIZE < 0
+#  undef BUFFER_SIZE
+#  define BUFFER_SIZE 0
 # endif
 
 char	*get_next_line(int fd);
