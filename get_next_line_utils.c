@@ -6,7 +6,7 @@
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:39:13 by hvercell          #+#    #+#             */
-/*   Updated: 2023/01/23 17:38:00 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/01/24 21:54:00 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ ssize_t	ft_memchr_i(char *s, int c)
 	size_t			n;
 
 	if (s == NULL)
-		return (-1); 
+		return (-1);
 	n = ft_strlen(s);
 	i = 0;
 	c = (unsigned char) c;
