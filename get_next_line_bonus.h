@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:39:04 by hvercell          #+#    #+#             */
-/*   Updated: 2023/01/24 21:38:56 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/01/24 21:38:18 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <unistd.h>
 # include <string.h>
@@ -28,7 +28,12 @@
 #  define BUFFER_SIZE 24
 # endif
 
+# ifndef FTOPEN_MAX
+#  define FTOPEN_MAX FOPEN_MAX
+# endif
+
 char	*get_next_line(int fd);
+void	ft_append_rest_to_line(char **line, char *rest, char *buf);
 void	ft_extract_line_from_rest(char **line, char *rest, ssize_t rest_s);
 char	*ft_handle_end_of_file(ssize_t size, char **line);
 void	ft_append_buf_to_line(char *buf, char **line, char *rest);

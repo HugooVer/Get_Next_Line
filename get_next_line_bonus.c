@@ -1,44 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvercell <hvercell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:38:55 by hvercell          #+#    #+#             */
-/*   Updated: 2023/01/24 21:38:49 by hvercell         ###   ########.fr       */
+/*   Updated: 2023/01/24 21:36:52 by hvercell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
 	ssize_t		size;
 	ssize_t		rest_s;
-	static char	rest[BUFFER_SIZE + 1] = {0};
+	static char	rest[FTOPEN_MAX][BUFFER_SIZE + 1] = {0};
 	char		buf[BUFFER_SIZE + 1];
 	char		*line;
 
 	line = NULL;
-	rest_s = ft_memchr_i(rest, '\n');
+	if (fd >= FTOPEN_MAX)
+		return (NULL);
+	rest_s = ft_memchr_i(rest[fd], '\n');
 	if (rest_s != -1)
-		ft_extract_line_from_rest(&line, rest, rest_s);
+		ft_extract_line_from_rest(&line, rest[fd], rest_s);
 	else
 	{
 		while (ft_memchr_i(line, '\n') == -1)
 		{
-			line = ft_strnjoin(line, rest, ft_strlen(rest) + 1);
-			ft_memset(rest, '\0', BUFFER_SIZE + 1);
-			ft_memset(buf, '\0', BUFFER_SIZE + 1);
+			ft_append_rest_to_line(&line, rest[fd], buf);
 			size = read(fd, buf, BUFFER_SIZE);
 			if (size == 0 || size == -1)
 				return (ft_handle_end_of_file(size, &line));
 			buf[size] = '\0';
-			ft_append_buf_to_line(buf, &line, rest);
+			ft_append_buf_to_line(buf, &line, rest[fd]);
 		}
 	}
 	return (line);
+}
+
+void	ft_append_rest_to_line(char **line, char *rest, char *buf)
+{
+	*line = ft_strnjoin(*line, rest, ft_strlen(rest) + 1);
+	ft_memset(rest, '\0', BUFFER_SIZE + 1);
+	ft_memset(buf, '\0', BUFFER_SIZE + 1);
 }
 
 void	ft_extract_line_from_rest(char **line, char *rest, ssize_t rest_s)
@@ -47,7 +54,6 @@ void	ft_extract_line_from_rest(char **line, char *rest, ssize_t rest_s)
 	ft_strlcpy(rest, rest + rest_s + 1, ft_strlen(rest + rest_s) + 1);
 }
 
-//
 char	*ft_handle_end_of_file(ssize_t size, char **line)
 {
 	if (size == 0 && *line[0] != '\0')
